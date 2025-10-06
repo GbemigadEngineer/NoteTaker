@@ -1,0 +1,38 @@
+name: CI Pipeline - Run Tests and Linting
+
+on:
+    push:
+        branches:
+            - dev
+    pull_request:
+        branches:
+            - dev
+
+jobs:
+    test_and_build:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v3
+              with:
+                  node-version: "20" # Use your project's Node version
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Run Integration Tests
+              # IMPORTANT: Tests require MongoDB, so use a service container or mock it.
+              # This example assumes you've mocked the DB or are running a service container.
+              run: npm test
+
+            - name: Check Test Results
+              # This step will automatically fail the job if `npm test` fails (exit code > 0)
+              run: echo "Tests passed successfully! Ready for merge."
+
+            # Optional: Add a step for linting (e.g., ESLint)
+            # - name: Run Linter
+            #   run: npm run lint

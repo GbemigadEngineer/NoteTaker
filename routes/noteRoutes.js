@@ -1,0 +1,13 @@
+const express = require("express");
+const { uploadAttachments } = require("../middleware/upload");
+const { createNote } = require("../controller/noteController");
+
+const router = express.Router();
+
+// The uploadAttachments middleware runs first to process and save files (to disk or Cloudinary).
+// Then, createNote runs, which saves the note metadata and the file metadata (from req.files)
+// to the database.
+
+router.route("/").post(uploadAttachments, createNote);
+
+module.exports = router;
