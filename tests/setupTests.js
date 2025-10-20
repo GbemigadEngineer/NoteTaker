@@ -1,4 +1,4 @@
-// test/setupTests.js (You would configure Jest to run this before your tests)
+// tests/setupTests.js (You would configure Jest to run this before your tests)
 const { MongoMemoryServer } = require("mongodb-memory-server");
 const mongoose = require("mongoose");
 
