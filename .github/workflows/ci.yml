@@ -1,0 +1,50 @@
+# .github/workflows/ci.yml
+
+name: CI Pipeline - Run Tests and Linting
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test_and_build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "20"
+
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Create 'uploads' folder for local disk tests
+        run: mkdir -p uploads # Multer needs this folder to exist for local storage
+
+      - name: Run Integration Tests
+        # Set environment variables for the test run.
+        env:
+          # Set NODE_ENV to 'test' so Jest's setupTests.js handles the database
+          # and to prevent server.js from trying to connect to a real DB.
+          NODE_ENV: test
+          # No secrets needed for LanguageTool since your code doesn't use a key.
+        run: npm test
+
+      - name: Check Test Results
+        run: echo "Tests passed successfully! Ready for merge."
