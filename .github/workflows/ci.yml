@@ -5,7 +5,7 @@ name: CI Pipeline - Run Tests and Linting
 on:
   push:
     branches:
-      - 'main'
+      - "main"
   pull_request:
     branches:
       - main
@@ -23,11 +23,19 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Cache node modules
+        uses: actions/cache@v3
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
       - name: Install dependencies
         run: npm install
 
       - name: Create 'uploads' folder for local disk tests
-        run: mkdir uploads # Multer needs this folder to exist for local storage
+        run: mkdir -p uploads # Multer needs this folder to exist for local storage
 
       - name: Run Integration Tests
         # Set environment variables for the test run.
