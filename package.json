@@ -45,7 +45,7 @@
       "/node_modules/"
     ],
     "transformIgnorePatterns": [
-      "/node_modules/(?!(marked)/)"
+      "/node_modules/(?!.*marked)"
     ]
   }
 }
