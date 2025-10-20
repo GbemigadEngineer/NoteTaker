@@ -5,6 +5,8 @@ const {
   getAllNotes,
   checkGrammar,
   editNote,
+  getNoteById,
+  deleteNote,
 } = require("../controller/noteController");
 const optionalUpload = require("../middleware/optionalUpload");
 
@@ -17,7 +19,9 @@ const router = express.Router();
 router.route("/").post(uploadAttachments, createNote).get(getAllNotes);
 router
   .route("/:id")
+  .get(getNoteById)
   .patch(optionalUpload, editNote)
+  .delete(deleteNote);
 router.route("/:id/grammar-check").post(checkGrammar);
 
 module.exports = router;

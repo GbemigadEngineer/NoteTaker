@@ -245,7 +245,6 @@ const editNote = catchAsync(async (req, res, next) => {
 
 // delete Note
 // Inside controller/noteController.js
-
 // delete Note
 const deleteNote = catchAsync(async (req, res, next) => {
   const id = req.params.id;
@@ -273,6 +272,7 @@ const deleteNote = catchAsync(async (req, res, next) => {
     data: null,
   });
 });
+
 // Export all controller functions
 module.exports = {
   createNote,
