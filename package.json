@@ -39,7 +39,7 @@
   "jest": {
     "testEnvironment": "node",
     "setupFilesAfterEnv": [
-      "<rootDir>/tests/setupTests.js"
+      "./tests/setupTests.js"
     ],
     "testPathIgnorePatterns": [
       "/node_modules/"
