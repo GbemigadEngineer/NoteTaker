@@ -1,7 +1,9 @@
 const express = require("express");
 const errorHandler = require("./middleware/errorHandler");
 const noteRoutes = require("./routes/noteRoutes");
+const path = require("path");
 const app = express();
+
 
 // Middlewares
 
@@ -14,7 +16,6 @@ if (process.env.NODE_ENV === "development") {
   app.use("/uploads", express.static(path.join(__dirname, "uploads")));
   // Example access: http://localhost:3000/uploads/attachments-12345.png
 }
-//
 
 // Logging middleware
 if (process.env.NODE_ENV === "development") {

@@ -18,8 +18,8 @@ if (process.env.NODE_ENV === "production") {
     cloudinary: cloudinary,
     params: {
       folder: "markdown-notes-attachements", // Folder name in cloudinary
-      // CRITICAL: We don't need custom filename logic here; Cloudinary handles
-      // unique ID generation automatically, which simplifies things!
+      // note to self:  don't need custom filename logic here; Cloudinary handles
+      // unique ID generation automatically.
       public_id: (req, file) => file.fieldname + "-" + Date.now(),
       format: "auto", // Supports all formats
     },

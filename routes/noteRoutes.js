@@ -1,6 +1,12 @@
 const express = require("express");
 const { uploadAttachments } = require("../middleware/upload");
-const { createNote } = require("../controller/noteController");
+const {
+  createNote,
+  getAllNotes,
+  checkGrammar,
+  editNote,
+} = require("../controller/noteController");
+const optionalUpload = require("../middleware/optionalUpload");
 
 const router = express.Router();
 
@@ -8,6 +14,10 @@ const router = express.Router();
 // Then, createNote runs, which saves the note metadata and the file metadata (from req.files)
 // to the database.
 
-router.route("/").post(uploadAttachments, createNote);
+router.route("/").post(uploadAttachments, createNote).get(getAllNotes);
+router
+  .route("/:id")
+  .patch(optionalUpload, editNote)
+router.route("/:id/grammar-check").post(checkGrammar);
 
 module.exports = router;
