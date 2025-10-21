@@ -24,7 +24,6 @@ if (process.env.NODE_ENV === "production") {
       // note to self:  don't need custom filename logic here; Cloudinary handles
       // unique ID generation automatically.
       public_id: (req, file) => file.fieldname + "-" + Date.now(),
-      format: "auto", // Supports all formats
     },
   });
 } else {
