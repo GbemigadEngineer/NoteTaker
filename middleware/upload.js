@@ -12,6 +12,9 @@ if (process.env.NODE_ENV === "production") {
   // Use cloudinary Storage
   cloudinary.config({
     secure: true, // Ensure secure URLs by using HTTPS
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
   });
 
   storage = new CloudinaryStorage({
