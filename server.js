@@ -21,7 +21,7 @@ if (process.env.NODE_ENV !== "test") {
   // Start the server only if we are not testing
   const PORT = process.env.PORT || 3000;
 
-  app.listen(PORT, () => {
+  app.listen(PORT, '0.0.0.0', () => {
     process.env.NODE_ENV === "production"
       ? console.log(`Server running in production mode on port ${PORT}`)
       : console.log(`Server running in development mode on port ${PORT}`);
