@@ -12,11 +12,7 @@ if (process.env.NODE_ENV !== "test") {
     .connect(DB, {
       useNewUrlParser: true,
       // that time out in the serverless cold-start environment.
-      serverSelectionTimeoutMS: 5000, // Optional: reduce timeout to fail faster
-      socketTimeoutMS: 45000, // Optional: increase socket timeout
-
-      // CRITICAL: Disable keep-alive
-      keepAlive: false,
+     
     })
     .then(() => {
       console.log("DB connection successful");
